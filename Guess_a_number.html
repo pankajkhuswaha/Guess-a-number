@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess A Number</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Condensed&display=swap');
+
+        :root {
+            --para-size: clamp(6px, 20px, 26px);
+            --heading-size: clamp(1.2rem, 3vw, 4rem);
+            --black: black;
+            --white: white;
+            --nav-bg: rgba(128, 231, 245, 0.363);
+            --footer-bg: rgba(48, 161, 167, 0.159);
+            --yellow: yellow;
+            --green: rgb(18, 238, 238);
+        }
+
+        .dark-mode {
+            --black: rgb(255, 246, 246);
+            --white: rgba(16, 12, 12, 0.968);
+            --nav-bg: rgb(115, 18, 244);
+            --footer-bg: rgba(125, 8, 243, 0.277);
+            --yellow: rgb(220, 15, 52);
+            --green: rgb(10, 113, 10);
+        }
+
+        body {
+            margin: 0;
+            padding: o;
+            font-family: 'Roboto Condensed', sans-serif;
+            overflow: hidden;
+            background-color: var(--white);
+            color: var(--black);
+            width: 100%;
+            height: 100%;
+        }
+
+        .flex_pr {
+            display: flex;
+            justify-content: center;
+            /* border: 1px solid var(--black); */
+            height: 40px;
+            align-items: center;
+        }
+
+        nav {
+            background-color: var(--nav-bg);
+            font-size: var(--heading-size);
+        }
+
+        .main_section {
+            height: 88vh;
+            flex-direction: column;
+            place-content: center;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0px;
+            height: 30px;
+            width: 100%;
+            font-size: var(--para-size);
+            background-color: var(--footer-bg);
+        }
+
+        .main_section p {
+            margin: -30vh 0px 22px 2px;
+        }
+
+        input {
+            border-radius: 3px;
+            margin-bottom: 30px;
+        }
+
+        .tip-section {
+            position: relative;
+            background: var(--yellow);
+            width: fit-content;
+            bottom: -3vw;
+            height:40px;
+            /* margin: 0px 10%; */
+            border-radius: 134px;
+            padding: 4px 15px;
+            place-content: center;
+            align-items: center;
+            display: none;
+        }
+
+        .tip-section p {
+            margin: 0 !important;
+            padding-left: 10px;
+        }
+
+        #pop-up {
+            flex-direction: column;
+            height: 300px;
+            width: 300px;
+            background-color: var(--white);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            border-radius: 15px;
+            display: none;
+            border: 2px solid var(--black);
+            place-content: center;
+        }
+
+        #pop-up button,
+        .block {
+            display: none;
+        }
+
+        .view {
+            display: flex !important;
+        }
+
+        .congrats {
+            background-image: url(../congrats-14.gif);
+            background-size: contain;
+            display: flex !important;
+            place-content: center;
+        }
+
+        .slide {
+            left: 100vw !important;
+        }
+
+        #night {
+            display: flex;
+            position: absolute;
+            padding: 0;
+            background-color: rgba(102, 51, 153, 0) !important;
+            color: black;
+            height: 40px;
+            width: 40px;
+            place-content: center;
+        }
+
+        .bi-sun-fill {
+            color: yellow;
+        }
+
+        .new,
+        #success {
+            display: flex;
+            position: absolute;
+            bottom: 50px;
+            right: 10px;
+            z-index: 9999;
+        }
+
+        div#sucess-bar {
+            display: none;
+            width: fit-content;
+            height: 40px;
+            position: absolute;
+            bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="new"><a href="" class="btn btn-primary">Generate a new number</a></div>
+    <div class="" id="night">
+        <span id="nightt" class="bi bi-moon-stars-fill fa-2x"></span>
+    </div>
+    <div id="pop-up" class="flex_pr">
+        <p id="alert"></p>
+        <button class="btn btn-outline-primary btn-1">OK</button>
+        <button class="btn btn-outline-success btn-2">GET SCRORE</button>
+    </div>
+    <nav class="flex_pr">
+        Guess A Number
+    </nav>
+    <div class="main_section flex_pr">
+        <p>Enter a Number Between 1 to 100:</p>
+        <input id="value-input" type="number" placeholder="Enter number here">
+        <button id="get_result" class="btn btn-success">Get Result</button>
+        <div class="tip-container flex_pr">
+            <div id="tip-bar" class="tip-section">
+                <h>
+                    Tip:
+                </h>
+                <p id="tip-input">
+                <p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="sucess-bar" class="btn btn-success">
+        Your Score is :
+        <p id="sucess">95</p>
+    </div>
+    <footer class="flex_pr">
+        copyright@pankaj2022
+    </footer>
+    <script>
+        var tip_input = document.getElementById("tip-input");
+        var value_input = document.getElementById("value-input");
+        var get_result = document.getElementById("get_result");
+        var Get_scrore = document.getElementById("Get_scrore");
+        var sucess_bar = document.getElementById("sucess");
+        var a_lert = document.getElementById("alert");
+        const random_num = Math.floor(Math.random() * 100) + 1;
+
+        // window.onload = function () {
+        //     tip_input.innerHTML = random_num;
+        // }
+
+        let chances = 0;
+
+        ++chances;
+        get_result.onclick = function () {
+            chances++;
+            var u = document.querySelector("#value-input").value;
+            var user_input = parseInt(u);
+            if (isNaN(user_input) == true) {
+                $("#pop-up").addClass("view");
+                $("#alert").html("Please! Enter a Number,<br> Tf YOu wanted to Play.")
+                $(".btn-1").addClass("view");
+                $(".btn-1").click(function () {
+                    $("#pop-up").removeClass("view");
+                });
+            } else if (user_input < random_num) {
+                $("#tip-bar").addClass("view");
+                $("#tip-input").html("Please ! Try to enter a greater number");
+                // ++chances;
+                // continue;
+            } else if (user_input > random_num) {
+                $("#tip-bar").addClass("view");
+                $("#tip-input").html("Please ! Try to enter a lower number");
+                // ++chances;
+                // continue;
+            }
+            else {
+                $("#tip-bar").removeClass("view");
+
+                console.log("Badhiya")
+                $("#alert").html("")
+                $("#pop-up").addClass("congrats");
+                $(".btn-2").addClass("view");
+                $(".btn-2").click(function () {
+                    $("#sucess-bar").addClass("view");
+                    sucess_bar.innerHTML = 100 - chances + 2;
+                    $("#pop-up").removeClass("congrats");
+
+                })
+
+            }
+
+
+
+        }
+        console.log(random_num)
+        // while (user_input != random_num) {
+        //     if (isNaN(user_input) == true) {
+        //         $("#pop-up").addClass("view");
+        //         $(".btn-1").addClass("view");
+        //         $(".btn-1").click(function () {
+        //             $("#pop-up").removeClass("view");
+
+        //         });
+
+        //         a_lert.innerHTML = 'BHai koi number daal le dimaag mat laga';
+        //     } else if (user_input > random_num) {
+        //         console.log("Koi chhota nuber daal")
+        //     } else if (user_input < random_num) {
+        //         console.log("Koi badda nuber daal")
+        //     } else {
+        //         console.log("Badhiya")
+        //         $("#alert").html("")
+        //         $("#pop-up").addClass("congrats");
+        //         $(".btn-2").addClass("view");
+        //     }
+        // }
+        // console.log("Hey iam working or not",user_input)
+        // }};;
+
+        var dark = document.getElementById("nightt");
+        dark.onclick = function () {
+            document.body.classList.toggle("dark-mode");
+            if (document.body.classList.contains("dark-mode")) {
+                dark.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
+            } else {
+                dark.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
+            }
+        }
+    </script>
+</body>
+
+</html>
