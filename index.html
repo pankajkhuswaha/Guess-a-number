@@ -261,7 +261,46 @@
                 })
 
             }
+            value_input.addEventListener('keydown', function (e) {
+                if (e.keyCode == 13) {
+                    // alert("you pressed enter")
+                    var u = document.querySelector("#value-input").value;
+                    var user_input = parseInt(u);
+                    if (isNaN(user_input) == true) {
+                        $("#pop-up").addClass("view");
+                        $("#alert").html("Please! Enter a Number,<br> If You wanted to Play.")
+                        $(".btn-1").addClass("view");
+                        $(".btn-1").click(function () {
+                            $("#pop-up").removeClass("view");
+                        });
+                    } else if (user_input < random_num) {
+                        $("#tip-bar").addClass("view");
+                        $("#tip-input").html("Please ! Try to enter a greater number");
+                        chances++;                // continue;
+                    } else if (user_input > random_num) {
+                        $("#tip-bar").addClass("view");
+                        $("#tip-input").html("Please ! Try to enter a lower number");
+                        chances++;                // continue;
+                    }
+                    else {
+                        $("#tip-bar").removeClass("view");
 
+                        console.log("Badhiya")
+                        $(".btn-1").removeClass("view");
+                        $("#alert").html("")
+                        $("#pop-up").addClass("congrats");
+                        $(".btn-2").addClass("view");
+                        console.log(chances)
+                        $(".btn-2").click(function () {
+                            $("#sucess-bar").addClass("view");
+                            sucess_bar.innerHTML = 100 - chances;
+                            $("#pop-up").removeClass("congrats");
+
+                        })
+                    }
+                }
+            })
+            console.log
 
 
         }
