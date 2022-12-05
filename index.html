@@ -87,7 +87,7 @@
             background: var(--yellow);
             width: fit-content;
             bottom: -3vw;
-            height:40px;
+            height: 40px;
             /* margin: 0px 10%; */
             border-radius: 134px;
             padding: 4px 15px;
@@ -116,6 +116,7 @@
             display: none;
             border: 2px solid var(--black);
             place-content: center;
+            z-index: 8888;
         }
 
         #pop-up button,
@@ -199,7 +200,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="sucess-bar" class="btn btn-success">
         Your Score is :
         <p id="sucess">95</p>
@@ -224,12 +225,12 @@
 
         ++chances;
         get_result.onclick = function () {
-            chances++;
+            // chances++;
             var u = document.querySelector("#value-input").value;
             var user_input = parseInt(u);
             if (isNaN(user_input) == true) {
                 $("#pop-up").addClass("view");
-                $("#alert").html("Please! Enter a Number,<br> Tf YOu wanted to Play.")
+                $("#alert").html("Please! Enter a Number,<br> If You wanted to Play.")
                 $(".btn-1").addClass("view");
                 $(".btn-1").click(function () {
                     $("#pop-up").removeClass("view");
@@ -237,24 +238,24 @@
             } else if (user_input < random_num) {
                 $("#tip-bar").addClass("view");
                 $("#tip-input").html("Please ! Try to enter a greater number");
-                // ++chances;
-                // continue;
+                chances++;                // continue;
             } else if (user_input > random_num) {
                 $("#tip-bar").addClass("view");
                 $("#tip-input").html("Please ! Try to enter a lower number");
-                // ++chances;
-                // continue;
+                chances++;                // continue;
             }
             else {
                 $("#tip-bar").removeClass("view");
 
                 console.log("Badhiya")
+                $(".btn-1").removeClass("view");
                 $("#alert").html("")
                 $("#pop-up").addClass("congrats");
                 $(".btn-2").addClass("view");
+                console.log(chances)
                 $(".btn-2").click(function () {
                     $("#sucess-bar").addClass("view");
-                    sucess_bar.innerHTML = 100 - chances + 2;
+                    sucess_bar.innerHTML = 100 - chances;
                     $("#pop-up").removeClass("congrats");
 
                 })
